@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 
 }
 
@@ -13,7 +12,8 @@ body {
     background: #ffffff;
     color: #000000;
     overflow: auto;
-    
+    scroll-behavior: smooth;
+
 }
 
 .accordion {
@@ -83,7 +83,7 @@ body {
     font-size: 32px;
     color: #000000;
     transition: all 0.4s ease;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     margin-left: 90px;
 }
 
@@ -94,9 +94,9 @@ body {
 
 .section.active .section-icon {
     position: absolute;
-    top: 40px;
-    left: 40px;
-    font-size: 36px;
+    top: 43px;
+    left: 130px;
+    font-size: 20px;
     color: #000000;
 }
 
@@ -112,10 +112,10 @@ body {
 }
 
 .section.active h2 {
-    font-size: 28px;
+    font-size: 18px;
     position: absolute;
     top: 45px;
-    left: 90px;
+    left: 150px;
     color: #000000;
     font-weight: 700;
     font-family: 'Playfair Display', serif;
@@ -144,7 +144,7 @@ body {
 }
 
 .content::-webkit-scrollbar {
-    width: 6px;
+    width: 2px;
 }
 
 .content::-webkit-scrollbar-track {
@@ -159,6 +159,10 @@ body {
 
 .content h1 {
     font-family: 'Playfair Display', serif;
+    font-family: 'Cinzel', serif;
+    font-family: 'Great Vibes', cursive;
+
+
     font-size: 42px;
     font-weight: 700;
     color: #000000;
@@ -417,7 +421,8 @@ body {
     }
 
     .section.active {
-        height: calc(100vh - 320px);
+        min-height: auto;
+        height: auto;
     }
 
     .section h2 {
@@ -445,10 +450,15 @@ body {
         font-size: 28px;
     }
 
-    .content {
-        padding: 80px 25px 25px 25px;
-        margin-top: 350px;
-    }
+   .content {
+  margin-top: 0;
+  padding: 100px 25px 25px 25px;
+  height: 100%;
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 
     .skills-container,
     .portfolio-grid {

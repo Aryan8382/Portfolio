@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johnie Doe - Portfolio CV</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f5f1eb;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-left {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 80px;
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 3rem;
+        }
+
+        .nav-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 1rem 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-number {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 12px;
+            font-weight: 500;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .nav-btn.active .nav-number {
+            color: #333;
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            color: #999;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #333;
+        }
+
+        /* Right Sidebar */
+        .sidebar-right {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 80px;
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .section-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 12px;
+            font-weight: 500;
+            color: #999;
+            padding: 2rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .section-label.active {
+            color: #333;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 80px;
+            margin-right: 80px;
+            min-height: 100vh;
+            padding: 3rem;
+        }
+
+        .content-section {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-size: 4rem;
+            font-weight: 300;
+            /* color: #ddd; */
+            margin-right: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            flex: 1;
+        }
+
+        .section-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: #333;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .profile-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .portrait-container {
+            position: relative;
+        }
+
+        .geometric-portrait {
+            background: #e8d5b7;
+            padding: 2rem;
+            border-radius: 8px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portrait-svg {
+            width: 100%;
+            height: 100%;
+            max-width: 300px;
+            max-height: 300px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .download-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: background 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .download-btn:hover {
+            background: #555;
+        }
+
+        .image-navigation {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .nav-arrow {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+            background: #f0f0f0;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .skill-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .category-btn {
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+        }
+
+        .category-btn.active {
+            background: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-name {
+            font-weight: 500;
+        }
+
+        .skill-percentage {
+            color: #666;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 4px;
+            background: #ddd;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: #333;
+            width: 0;
+            transition: width 1s ease-out;
+            border-radius: 2px;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-container {
+            position: relative;
+            background: white;
+            padding: 2rem;
+            border-left: 4px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .testimonial {
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+        }
+
+        .testimonial-text {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .testimonial-arrow {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-arrow:hover {
+            background: #f0f0f0;
+        }
+
+        /* Clients */
+        .clients-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+        }
+
+        .client-item {
+            background: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .client-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        .section-footer {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid #ddd;
+            margin-top: 3rem;
+        }
+
+        .section-footer p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            color: #999;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: #333;
+        }
+
+        /* Placeholder Content */
+        .placeholder-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            text-align: center;
+            color: #666;
+        }
+
+        .placeholder-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+
+            .sidebar-left,
+            .sidebar-right {
+                display: none;
+            }
+
+            .main-content {
+                margin: 0;
+                padding: 2rem 1rem;
+            }
+
+            .profile-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skills-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .clients-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .section-number {
+                font-size: 3rem;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .clients-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Left Sidebar Navigation -->
+    <nav class="sidebar-left">
+        <div class="logo">
+            <span style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">AS</span>
+        </div>
+
+        <div class="nav-sections">
+            <button class="nav-btn active" data-section="0">
+                <span class="nav-number">01</span>
+            </button>
+            <button class="nav-btn" data-section="1">
+                <span class="nav-number">02</span>
+            </button>
+            <button class="nav-btn" data-section="2">
+                <span class="nav-number">03</span>
+            </button>
+            <button class="nav-btn" data-section="3">
+                <span class="nav-number">04</span>
+            </button>
+        </div>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-dribbble"></i></a>
+        </div>
+    </nav>
+
+    <!-- Right Sidebar Labels -->
+    <div class="sidebar-right">
+        <div class="section-label active" data-section="0">About</div>
+        <div class="section-label" data-section="1">Portfolio</div>
+        <div class="section-label" data-section="2">Blog</div>
+        <div class="section-label" data-section="3">Contact</div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- About Me Section -->
+        <section class="content-section active" id="section-0">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h1 class="section-title">ABOUT ME</h1>
+                <div class="section-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div class="about-content">
+                <div class="profile-section">
+                    <div class="portrait-container">
+                        <img src="" alt="img1">
+                    </div>
+
+                    <div class="profile-info">
+                        <h2 class="name">Johnie Doe</h2>
+                        <p class="title">Freelancer Extraordinaire</p>
+
+                        <p class="description">
+                            Vivamus sed nulla volutpat, eleifend quam vel, pulvinar elit. Pellentesque habitant morbi
+                            tristique senectus et netus et malesuada fames ac turpis egestas. Sed faucibus risus
+                            lacus, feugiat egestas lacus auctor sit amet. Suspendisse vitae dolor ullamcorper,
+                            tristique lorem id, faucibus massa.
+                        </p>
+
+                        <button class="download-btn">
+                            <span>DOWNLOAD CV</span>
+                            <i class="fas fa-download"></i>
+                        </button>
+
+                        <div class="image-navigation">
+                            <button class="nav-arrow" id="prevImage">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="image-counter">Image One Of Three</span>
+                            <button class="nav-arrow" id="nextImage">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-section">
+                    <div class="skill-categories">
+                        <div class="category-btn active">PROGRAMMING SKILLS</div>
+                        <div class="category-btn">EDUCATION</div>
+                        <div class="category-btn">EXPERIENCE</div>
+                    </div>
+
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">HTML</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">CSS</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percentage">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">PHP</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonials-section">
+                    <h3 class="section-subtitle">Testimonials</h3>
+                    <div class="testimonial-container">
+                        <div class="testimonial active">
+                            <p class="testimonial-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur venenatis
+                                euismod.
+                                Cras ac velit accumsan, convallis nunc nec, volutpat sapien. Ut placerat, arcu sit amet
+                                euismod
+                                elementum, orci lorem consequat nulla, in feugiat turpis ligula sit amet est.
+                            </p>
+                            <p class="testimonial-author">BOB FOX / CEO AT STOCK INDUSTRIES</p>
+                        </div>
+
+                        <div class="testimonial">
+                            <p class="testimonial-text">
+                                Exceptional work quality and professional approach. The attention to detail and creative
+                                solutions provided exceeded our expectations. Highly recommended for any creative
+                                project.
+                            </p>
+                            <p class="testimonial-author">SARAH JOHNSON / CREATIVE DIRECTOR</p>
+                        </div>
+
+                        <div class="testimonial-controls">
+                            <button class="testimonial-arrow" id="prevTestimonial">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="testimonial-arrow" id="nextTestimonial">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clients-section">
+                    <h3 class="section-subtitle">Clients</h3>
+                    <div class="clients-grid">
+                        <div class="client-item">Sunshine Co.</div>
+                        <div class="client-item">Storytime</div>
+                        <div class="client-item">Brandit</div>
+                        <div class="client-item">Vintage</div>
+                        <div class="client-item">JS Studio</div>
+                    </div>
+                </div>
+
+                <footer class="section-footer">
+                    <p>&copy; 2023 Jonathan Doe by WebDingo. All Rights Reserved.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </footer>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="content-section" id="section-1">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h1 class="section-title">PORTFOLIO</h1>
+                <div class="section-dots">
+                    <span class="dot"></span>
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            <div class="placeholder-content">
+                <h2>Portfolio</h2>
+                <p>This section is under construction</p>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section class="content-section" id="section-2">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h1 class="section-title">BLOG</h1>
+                <div class="section-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            <div class="placeholder-content">
+                <h2>Blog</h2>
+                <p>This section is under construction</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="content-section" id="section-3">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h1 class="section-title">CONTACT</h1>
+                <div class="section-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot active"></span>
+                </div>
+            </div>
+            <div class="placeholder-content">
+                <h2>Contact</h2>
+                <p>This section is under construction</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- <script src="script.js"></script> -->
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const sectionLabels = document.querySelectorAll('.section-label');
+            const contentSections = document.querySelectorAll('.content-section');
+            const sectionDots = document.querySelectorAll('.section-dots .dot');
+
+            let currentSection = 0;
+            let currentTestimonial = 0;
+            const testimonials = document.querySelectorAll('.testimonial');
+
+            // Initialize skill bars animation
+            function animateSkillBars() {
+                const skillBars = document.querySelectorAll('.skill-progress');
+                skillBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    setTimeout(() => {
+                        bar.style.width = width + '%';
+                    }, 500);
+                });
+            }
+
+            // Section navigation
+            function showSection(sectionIndex) {
+                // Hide all sections
+                contentSections.forEach(section => section.classList.remove('active'));
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                sectionLabels.forEach(label => label.classList.remove('active'));
+
+                // Show selected section
+                contentSections[sectionIndex].classList.add('active');
+                navButtons[sectionIndex].classList.add('active');
+                sectionLabels[sectionIndex].classList.add('active');
+
+                // Update dots
+                const currentDots = contentSections[sectionIndex].querySelectorAll('.section-dots .dot');
+                currentDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === sectionIndex);
+                });
+
+                currentSection = sectionIndex;
+
+                // Animate skill bars if showing about section
+                if (sectionIndex === 0) {
+                    setTimeout(animateSkillBars, 300);
+                }
+            }
+
+            // Add click listeners to navigation buttons
+            navButtons.forEach((btn, index) => {
+                btn.addEventListener('click', () => showSection(index));
+            });
+
+            // Testimonial navigation
+            function showTestimonial(index) {
+                testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+                testimonials[index].classList.add('active');
+                currentTestimonial = index;
+            }
+
+            // Testimonial controls
+            const prevTestimonialBtn = document.getElementById('prevTestimonial');
+            const nextTestimonialBtn = document.getElementById('nextTestimonial');
+
+            if (prevTestimonialBtn && nextTestimonialBtn) {
+                prevTestimonialBtn.addEventListener('click', () => {
+                    currentTestimonial = currentTestimonial > 0 ? currentTestimonial - 1 : testimonials.length - 1;
+                    showTestimonial(currentTestimonial);
+                });
+
+                nextTestimonialBtn.addEventListener('click', () => {
+                    currentTestimonial = currentTestimonial < testimonials.length - 1 ? currentTestimonial + 1 : 0;
+                    showTestimonial(currentTestimonial);
+                });
+            }
+
+            // Image navigation (placeholder functionality)
+            const prevImageBtn = document.getElementById('prevImage');
+            const nextImageBtn = document.getElementById('nextImage');
+            const imageCounter = document.querySelector('.image-counter');
+            let currentImage = 1;
+            const totalImages = 3;
+
+            if (prevImageBtn && nextImageBtn && imageCounter) {
+                prevImageBtn.addEventListener('click', () => {
+                    currentImage = currentImage > 1 ? currentImage - 1 : totalImages;
+                    updateImageCounter();
+                });
+
+                nextImageBtn.addEventListener('click', () => {
+                    currentImage = currentImage < totalImages ? currentImage + 1 : 1;
+                    updateImageCounter();
+                });
+
+                function updateImageCounter() {
+                    const imageNames = ['One', 'Two', 'Three'];
+                    imageCounter.textContent = `Image ${imageNames[currentImage - 1]} Of Three`;
+                }
+            }
+
+            // Skill category switching
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            categoryButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+
+            // Download CV button
+            const downloadBtn = document.querySelector('.download-btn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', () => {
+                    // Placeholder for CV download functionality
+                    alert('CV download functionality would be implemented here');
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                switch (e.key) {
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        const prevSection = currentSection > 0 ? currentSection - 1 : contentSections.length - 1;
+                        showSection(prevSection);
+                        break;
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        const nextSection = currentSection < contentSections.length - 1 ? currentSection + 1 : 0;
+                        showSection(nextSection);
+                        break;
+                    case 'ArrowLeft':
+                        if (currentSection === 0) {
+                            e.preventDefault();
+                            currentTestimonial = currentTestimonial > 0 ? currentTestimonial - 1 : testimonials.length - 1;
+                            showTestimonial(currentTestimonial);
+                        }
+                        break;
+                    case 'ArrowRight':
+                        if (currentSection === 0) {
+                            e.preventDefault();
+                            currentTestimonial = currentTestimonial < testimonials.length - 1 ? currentTestimonial + 1 : 0;
+                            showTestimonial(currentTestimonial);
+                        }
+                        break;
+                }
+            });
+
+            // Smooth scrolling for better UX
+            document.documentElement.style.scrollBehavior = 'smooth';
+
+            // Initialize the page
+            showSection(0);
+            showTestimonial(0);
+
+            // Add loading animation
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+                animateSkillBars();
+            }, 100);
+
+            // Add hover effects for interactive elements
+            const interactiveElements = document.querySelectorAll('button, .client-item, .social-icons a');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.transform = 'translateY(-2px)';
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    element.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add parallax effect to geometric portrait
+            const portrait = document.querySelector('.geometric-portrait');
+            if (portrait) {
+                document.addEventListener('mousemove', (e) => {
+                    const x = (e.clientX / window.innerWidth) * 10;
+                    const y = (e.clientY / window.innerHeight) * 10;
+                    portrait.style.transform = `translate(${x}px, ${y}px)`;
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
