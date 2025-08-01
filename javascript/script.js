@@ -157,16 +157,3 @@
                 console.log('Project card clicked:', this.querySelector('h4').textContent);
             });
         });
-
-        // Form input animations
-        const formInputs = document.querySelectorAll('input, textarea');
-        formInputs.forEach(input => {
-            input.addEventListener('focus', function () {
-                this.parentElement.style.transform = 'translateY(-2px)';
-            });
-
-            input.addEventListener('blur', function () {
-                this.parentElement.style.transform = '';
-            });
-        });
-   
