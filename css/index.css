@@ -416,16 +416,20 @@ body {
 }
 
 .project-image {
-    height: 180px;
-    background: linear-gradient(135deg, #2f3e46, #354f52); /* Charcoal to Dark Slate Gray */
+    height: 250px;
+    background: linear-gradient(135deg, #2f3e46, #354f52); 
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 48px;
-    color: #cad2c5; /* Ash Gray text */
+    color: #354f52; /* Ash Gray text */
     position: relative;
     overflow: hidden;
+     background-size: cover;         
+    background-position: center;
+    background-repeat: no-repeat;  
 }
+
 
 .project-image::after {
     content: '';
