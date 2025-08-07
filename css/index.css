@@ -577,7 +577,11 @@ body {
     font-weight: 500;
 }
 
-
+.contact-number,
+.contact-email {
+    font-size: 18px;
+    color: #000000;
+}
 
 /* Social Links */
 .social-links {
